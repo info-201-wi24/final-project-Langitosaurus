@@ -1,6 +1,24 @@
 library("tidyverse")
 
+#read data and construct dataframe
 xpr_df <- read.csv("datasets/xrp.csv")
 nasdaq_df <- read.csv("datasets/nasdaq.csv")
 
-#Joining based on date, need new column labels to differentiate xpr and nasdaq
+#ensure date data is usable
+xpr_df$Date <- as.Date(xpr_df$Date, "%m/%d/%Y")
+nasdaq_df$Date <- as.Date(nasdaq_df$Date, "%m/%d/%Y")
+
+#Joining based on date, only closing prices used.
+joined_df <- left_join(xpr_df 
+                       %>% rename(xpr_price = Price) 
+                       %>% select(Date,xpr_price), 
+                       nasdaq_df 
+                       %>% rename(nasdaq_price = Close.Last) 
+                       %>% select(Date,nasdaq_price))
+
+#nasdaq data missing for sundays and saturdays, so we delete them.
+joined_df <- joined_df %>% filter(!is.na(nasdaq_price))
+
+
+
+
