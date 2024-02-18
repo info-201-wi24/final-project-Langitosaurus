@@ -19,6 +19,10 @@ joined_df <- left_join(xpr_df
 #nasdaq data missing for sundays and saturdays, so we delete them.
 joined_df <- joined_df %>% filter(!is.na(nasdaq_price))
 
-
+#Categorical variable indicating whether the XRP price increased, decreased, or stayed the same 
+#compared to the previous day.
+joined_df <- joined_df %>%
+  mutate(xpr_change = ifelse(xpr_price > lag(xpr_price), "Increased",
+                             ifelse(xpr_price < lag(xpr_price), "Decreased", "No Change")))
 
 
