@@ -19,10 +19,24 @@ joined_df <- left_join(xpr_df
 #nasdaq data missing for sundays and saturdays, so we delete them.
 joined_df <- joined_df %>% filter(!is.na(nasdaq_price))
 
+#calculate change from each type of data
+joined_df <- joined_df %>% 
+  mutate(xpr_change = xpr_price - lag(xpr_price)) %>% mutate(nasdaq_change = nasdaq_price - lag(nasdaq_price))
+
 #Categorical variable indicating whether the XRP price increased, decreased, or stayed the same 
 #compared to the previous day.
-joined_df <- joined_df %>%
-  mutate(xpr_change = ifelse(xpr_price > lag(xpr_price), "Increased",
-                             ifelse(xpr_price < lag(xpr_price), "Decreased", "No Change")))
+joined_df <- joined_df %>% 
+  mutate(xpr_status = ifelse(xpr_change < 0, "Increased", 
+                             ifelse(xpr_change > 0, "Decreased", "No Change"))) %>% 
+  mutate(nasdaq_status = ifelse(nasdaq_change < 0, "Increased", 
+                                ifelse(nasdaq_change > 0, "Decreased", "No Change")))
+#calculate change in percentage
+joined_df <- joined_df %>% 
+  mutate(xpr_perc = round(xpr_change / lag(xpr_price) * 100, 3) ) %>% 
+  mutate(nasdaq_perc = round(nasdaq_change / lag(nasdaq_price) * 100, 3) )
 
+#trying gg-plots
+  ggplot() + 
+    geom_line(data = joined_df, aes(x = Date, y = xpr_perc, color = "blue"), na.rm = TRUE) + 
+    geom_line(data = joined_df, aes(x = Date, y = nasdaq_perc, color = "red"), na.rm = TRUE)
 
