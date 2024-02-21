@@ -35,6 +35,12 @@ joined_df <- joined_df %>%
   mutate(xpr_perc = round(xpr_change / lag(xpr_price) * 100, 3) ) %>% 
   mutate(nasdaq_perc = round(nasdaq_change / lag(nasdaq_price) * 100, 3) )
 
+#summarize mean and median of change for each
+xpr_mean <- joined_df %>%  summarize(xpr_mean = mean(xpr_perc, na.rm = TRUE))
+xpr_median <- joined_df %>%  summarize(xpr_median = median(xpr_perc, na.rm = TRUE))
+nasdaq_mean <- joined_df %>%  summarize(nasdadq_mean = mean(nasdaq_perc, na.rm = TRUE))
+nasdaq_median <- joined_df %>%  summarize(nasdaq_median = median(nasdaq_perc, na.rm = TRUE))
+
 #trying gg-plots
   ggplot() + 
     geom_line(data = joined_df, aes(x = Date, y = xpr_perc, color = "blue"), na.rm = TRUE) + 
