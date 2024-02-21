@@ -46,3 +46,4 @@ nasdaq_median <- joined_df %>%  summarize(nasdaq_median = median(nasdaq_perc, na
     geom_line(data = joined_df, aes(x = Date, y = xpr_perc, color = "blue"), na.rm = TRUE) + 
     geom_line(data = joined_df, aes(x = Date, y = nasdaq_perc, color = "red"), na.rm = TRUE)
 
+write.csv(joined_df, "nasdaq_xpr_comparison.csv")
