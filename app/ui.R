@@ -5,31 +5,63 @@ library(markdown)
 
 pastel_blue <- "#ADD8E6"
 
+my_theme <- bs_theme(bg = "#ADD8E6", preset = "lumen", 
+                fg = "#000")
+box_theme <- bs_theme(bg = "#FFF", preset = "lumen", 
+                     fg = "#000")
 # Introduction Page
-introduction_tab <- tabPanel("Introduction",
-                             h1("Welcome to Crypto Nasdaq Analysis", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 30px; font-weight: bold;"),
-                             br(),
-                             br(),
-                             p("Dataset 1: Cryptocurrency prediction AI training dataset Cryptocurrency Prediction Artificial Intelligence", style = "color: #333; font-family: Georgia, serif; font-size: 20px;"),
-                             p("Dataset 2: Nasdaq Composite prices dataset Nasdaq Composite Historical Prices.", style = "color: #333; font-family: Georgia, serif; font-size: 20px;"),
-                             br(),
-                             p("Major Questions:", style = "color: #333; font-family: Georgia, serif; font-size: 20px;"),
-                             br(),
-                             p("1. How do cryptocurrency trends compare to movements in the Nasdaq Composite index?",style = "color: #333; font-family: Georgia, serif; font-size: 20px;"),
-                             p("2. What insights can be gained from comparing AI predictions on cryptocurrency trends with movements of the Nasdaq Composite index?",style = "color: #333; font-family: Georgia, serif; font-size: 20px;"),
-                             p("3. What are the implications of these comparisons for investment strategies and market predictions?",style = "color: #333; font-family: Georgia, serif; font-size: 20px;"),
-                             br(),
-                             p("Our project aims to explore the conjunction between cryptocurrency predictions and traditional stock market movements. By comparing the cryptocurrency prediction AI training dataset with the NASDAQ Composite prices dataset, we seek to uncover insights into the financial landscape, the influence of AI and ML on market predictions, and the varying dynamics between traditional and digital financial markets.", style = "color: #333; font-family: Georgia, serif; font-size: 20px;"),
-                             br(),
-                             p("In addition to the comparison of existing data and innovative adaptation, we also incorporate recent innovations in technology to obtain predictive data. This includes using AI-generated datasets to predict future cryptocurrency market movements beyond the limitations of historical records. By leveraging machine learning and AI-generated data, we aim to provide further understanding of digital financial markets and enhance predictive capabilities.", style = "color: #333; font-family: Georgia, serif; font-size: 20px;"),
-                             br(),
-                             p("Ethical considerations include transparency, bias, and market manipulation associated with the use of AI and machine learning in financial markets. Privacy concerns may also arise from access to historical financial data, raising questions about individual trading activities and market behaviors.", style = "color: #333; font-family: Georgia, serif; font-size: 20px;"),
-                             br(),
-                             p("Our project emphasizes the importance of understanding the relationship and behavior between new digital markets (cryptocurrency) and traditional financial institutions (the stock market). By comparing these datasets, we hope to shed light on the evolving narrative of finance, providing insights into investment strategies and market predictions.", style = "color: #333; font-family: Georgia, serif; font-size: 20px;")
-)
+introduction_tab <- tabPanel(
+  "Introduction",
+  h1("Welcome to Crypto Nasdaq Analysis", style = "color: #333; font-family: Georgia, serif; text-align: center; font-weight: bold;"),
+  br(),
+  fluidRow(
+    column(2),
+    column(8,
+           style="bg-color: #FFF",
+           p("Our project aims to explore the conjunction between cryptocurrency predictions and traditional stock market movements. By comparing the cryptocurrency prediction AI training dataset with the NASDAQ Composite prices dataset, we seek to uncover insights into the financial landscape, the influence of AI and ML on market predictions, and the varying dynamics between traditional and digital financial markets.", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 20px;"),
+           br(),
+           p("In addition to the comparison of existing data and innovative adaptation, we also incorporate recent innovations in technology to obtain predictive data. This includes using AI-generated datasets to predict future cryptocurrency market movements beyond the limitations of historical records. By leveraging machine learning and AI-generated data, we aim to provide further understanding of digital financial markets and enhance predictive capabilities.", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 20px;"),
+           br(),
+           p("Ethical considerations include transparency, bias, and market manipulation associated with the use of AI and machine learning in financial markets. Privacy concerns may also arise from access to historical financial data, raising questions about individual trading activities and market behaviors.", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 20px;"),
+           br(),
+           p("Our project emphasizes the importance of understanding the relationship and behavior between new digital markets (cryptocurrency) and traditional financial institutions (the stock market). By comparing these datasets, we hope to shed light on the evolving narrative of finance, providing insights into investment strategies and market predictions.", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 20px;"),
+    ),
+    column(2)
+  ),
+  br(),
+  fluidRow(
+    column(6,
+           h2("Dataset", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 30px; font-weight: bold;"),
+           br(),
+           fluidRow(
+             column(2),
+             column(8,
+                    p("Dataset 1: Cryptocurrency prediction AI training dataset Cryptocurrency Prediction Artificial Intelligence", style = "color: #333; font-family: Georgia, serif; font-size: 20px;"),
+                    p("Dataset 2: Nasdaq Composite prices dataset Nasdaq Composite Historical Prices.", style = "color: #333; font-family: Georgia, serif; font-size: 20px;")
+                    ),
+             column(2)
+           )
+    ),
+    column(6,
+           h2("Major Questions", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 30px; font-weight: bold;"),
+           br(),
+           fluidRow(
+             column(1),
+             column(10,
+                    p("1. How do cryptocurrency trends compare to movements in the Nasdaq Composite index?",style = "color: #333; font-family: Georgia, serif; font-size: 20px;"),
+                    p("2. What insights can be gained from comparing AI predictions on cryptocurrency trends with movements of the Nasdaq Composite index?",style = "color: #333; font-family: Georgia, serif; font-size: 20px;"),
+                    p("3. What are the implications of these comparisons for investment strategies and market predictions?",style = "color: #333; font-family: Georgia, serif; font-size: 20px;")
+             ),
+             column(1)
+           )
+      ),
+    ),
+  br(),
+  )
 
 # Visualization 1 Page
 viz_1_sidebar <- sidebarPanel(
+  theme= box_theme,
   h2("Filters", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 18px; font-weight: bold;"),
   dateRangeInput(inputId = "date_range_1",
                  label = h4("Date Range", style = "color: #333; font-family: Georgia, serif; text-align: center;"),
@@ -141,5 +173,5 @@ ui <- navbarPage("Crypto Nasdaq Analysis",
                  viz_2_tab,
                  viz_3_tab,
                  conclusion_tab,
-                 tags$body(style = paste0("background-color: ", pastel_blue, ";"))
+                 theme = my_theme
 )
