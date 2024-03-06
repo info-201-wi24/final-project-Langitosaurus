@@ -55,7 +55,7 @@ viz_3_sidebar <- sidebarPanel(
 
 viz_3_main_panel <- mainPanel(
   h2("Visualization 3 Title", style = "color: #333; font-family: Georgia, serif; text-align: center;")
-  plotlyOutput(outputId = "your_viz_1_output_id")
+  # plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
 viz_3_tab <- tabPanel("",
