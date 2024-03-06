@@ -113,7 +113,7 @@ viz_3_sidebar <- sidebarPanel(
   sliderInput(inputId = "slider_2",
               label = h3("Range of Crypto Price"), min = 0, 
               max = 3, value = c(0, 3), step = 0.1)
-#call input$check (vector with string for checking line types)
+#call input$slider (vector with min and maximum value bounds)
 )
 
 viz_3_main_panel <- mainPanel(
