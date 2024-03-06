@@ -16,7 +16,7 @@ server <- function(input, output) {
   })
   
   # Output 2: Fluctuation of Price Change by Time
-  output$your_viz_1_output_id <- renderPlotly({
+  output$output_2 <- renderPlotly({
     crypto_data <- crypto_data %>%
       mutate(Nasdaq_Change = (nasdaq_price / lag(nasdaq_price) - 1) * 100,
              Crypto_Change = (xpr_price / lag(xpr_price) - 1) * 100) %>%
@@ -32,7 +32,7 @@ server <- function(input, output) {
   
   # Output 3: Correlation Plot
   output$output_3 <- renderPlotly({
-    plot_ly(data = crypto_data, x = ~Nasdaq_Price, y = ~Crypto_Price, type = 'scatter', mode = 'markers') %>%
+    plot_ly(data = crypto_data, x = ~nasdaq_price, y = ~xpr_price, type = 'scatter', mode = 'markers') %>%
       layout(title = 'Correlation between Nasdaq and Cryptocurrency Prices',
              xaxis = list(title = 'Nasdaq Price'),
              yaxis = list(title = 'Cryptocurrency Price'))
