@@ -1,0 +1,12 @@
+name: final-project-nasdaq-vs-crypto
+title: final-project-nasdaq-vs-crypto
+username: langitosaur
+account: langitosaur
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11420894
+bundleId: 8340740
+url: https://langitosaur.shinyapps.io/final-project-nasdaq-vs-crypto/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

@@ -77,7 +77,7 @@ viz_1_sidebar <- sidebarPanel(
   #call input$dates_range (vector with two Date objects to measure the max and min date range)
   checkboxGroupInput(inputId = "check_1",
                      label = h4("Statistical Lines", style = "color: #333; font-family: Georgia, serif; text-align: center;"),
-                     choices = list("Average Line" = "avg","Median Line" = "med", "Range Line" = "range")
+                     choices = list("Average Line" = "avg","Median Line" = "med")
   #call input$check (vector with string for checking line types)
   )
 )
@@ -85,7 +85,9 @@ viz_1_sidebar <- sidebarPanel(
 viz_1_main_panel <- mainPanel(
   h2("Comparative Price by Time", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 30px; font-weight: bold;"),
   br(),
-  plotlyOutput(outputId = "output_1")
+  div(plotlyOutput(outputId = "output_1"),
+    style="background-color:#ADD8E6"),
+  
 )
 
 viz_1_tab <- tabPanel("Price Plot",
@@ -111,7 +113,7 @@ viz_2_sidebar <- sidebarPanel(
   ),
   checkboxGroupInput(inputId = "check_2",
                      label = h4("Statistical Lines", style = "color: #333; font-family: Georgia, serif; text-align: center;"),
-                     choices = list("Average Line" = "avg","Median Line" = "med", "Range Line" = "range")
+                     choices = list("Average Line" = "avg","Median Line" = "med")
   #call input$check (vector with string for checking line types)
   )
 )
@@ -149,7 +151,12 @@ viz_3_sidebar <- sidebarPanel(
               max = 16, value = c(0, 16), step = 0.5),
   sliderInput(inputId = "slider_2",
               label = h3("Range of Crypto Price"), min = 0, 
-              max = 3, value = c(0, 3), step = 0.1)
+              max = 3, value = c(0, 3), step = 0.1),
+  checkboxGroupInput(inputId = "check_3",
+                     label = h4("Statistical Lines", style = "color: #333; font-family: Georgia, serif; text-align: center;"),
+                     choices = list("Average Line" = "avg","Median Line" = "med")
+                     #call input$check (vector with string for checking line types)
+  )
 #call input$slider (vector with min and maximum value bounds)
 )
 
