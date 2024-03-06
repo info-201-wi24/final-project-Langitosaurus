@@ -37,7 +37,7 @@ viz_2_sidebar <- sidebarPanel(
 
 viz_2_main_panel <- mainPanel(
   h2("Fluctuation of Price Change by Time", style = "color: #333; font-family: Georgia, serif; text-align: center;"),
-  plotlyOutput(outputId = "your_viz_1_output_id")
+  # plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
 viz_2_tab <- tabPanel("Change Plot",
@@ -50,7 +50,6 @@ viz_2_tab <- tabPanel("Change Plot",
 # Visualization 3 Page
 viz_3_sidebar <- sidebarPanel(
   h2("Options for graph", style = "color: #333; font-family: Georgia, serif; text-align: center;")
-  # TODO: Put inputs for modifying graph here
 )
 
 viz_3_main_panel <- mainPanel(
@@ -58,7 +57,7 @@ viz_3_main_panel <- mainPanel(
   # plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
-viz_3_tab <- tabPanel("",
+viz_3_tab <- tabPanel("Visualization 3",
                       sidebarLayout(
                         viz_3_sidebar,
                         viz_3_main_panel
@@ -68,7 +67,7 @@ viz_3_tab <- tabPanel("",
 # Conclusion Page
 conclusion_tab <- tabPanel("Conclusion",
                            h1("Summary and Conclusion", style = "color: #333; font-family: Georgia, serif; text-align: center;"),
-                           p("In this analysis, we explored the comparability of cryptocurrencies and their trends.", style = "color: #333; font-family: Georgia, serif;")
+                           p("In this analysis, we explored the comparability of cryptocurrencies and their trends.", style = "color: #333; font-family: Georgia, serif; text-align: center;")
 )
 
 # UI
