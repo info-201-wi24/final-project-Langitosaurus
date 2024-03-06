@@ -30,8 +30,23 @@ introduction_tab <- tabPanel("Introduction",
 
 # Visualization 1 Page
 viz_1_sidebar <- sidebarPanel(
-  h2("Scale by Time", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 18px; font-weight: bold;"),
-  h2("Data Selection", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 18px; font-weight: bold;")
+  h2("Filters", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 18px; font-weight: bold;"),
+  dateRangeInput(inputId = "date_range_1",
+                 label = h4("Date Range", style = "color: #333; font-family: Georgia, serif; text-align: center;"),
+                 format = "mm-dd-yyyy",
+                 start = "2018-01-02",
+                 end = "2024-02-09",
+                 min = "2018-01-02",
+                 max = "2024-02-09",
+                 startview = "year",
+                 separator = "to"
+  ),
+  #call input$dates_range (vector with two Date objects to measure the max and min date range)
+  checkboxGroupInput(inputId = "check_1",
+                     label = h4("Statistical Lines", style = "color: #333; font-family: Georgia, serif; text-align: center;"),
+                     choices = list("Average Line" = "avg","Median Line" = "med", "Range Line" = "range")
+  #call input$check (vector with string for checking line types)
+  )
 )
 
 viz_1_main_panel <- mainPanel(
@@ -48,8 +63,22 @@ viz_1_tab <- tabPanel("Price Plot",
 
 # Visualization 2 Page
 viz_2_sidebar <- sidebarPanel(
-  h2("Scale by Time", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 30px; font-weight: bold;"),
-  h2("Data Selection", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 18px; font-weight: bold;")
+  h2("Filters", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 18px; font-weight: bold;"),
+  dateRangeInput(inputId = "date_range_2",
+                 label = h4("Date Range", style = "color: #333; font-family: Georgia, serif; text-align: center;"),
+                 format = "mm-dd-yyyy",
+                 start = "2018-01-02",
+                 end = "2024-02-09",
+                 min = "2018-01-02",
+                 max = "2024-02-09",
+                 startview = "year",
+                 separator = "to"
+  ),
+  checkboxGroupInput(inputId = "check_1",
+                     label = h4("Statistical Lines", style = "color: #333; font-family: Georgia, serif; text-align: center;"),
+                     choices = list("Average Line" = "avg","Median Line" = "med", "Range Line" = "range")
+  #call input$check (vector with string for checking line types)
+  )
 )
 
 viz_2_main_panel <- mainPanel(
@@ -66,15 +95,33 @@ viz_2_tab <- tabPanel("Change Plot",
 
 # Visualization 3 Page
 viz_3_sidebar <- sidebarPanel(
-  h2("Options for graph", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 18px; font-weight: bold;")
+  h2("Filters", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 18px; font-weight: bold;"),
+  dateRangeInput(inputId = "date_range_3",
+                 label = h4("Date Range", style = "color: #333; font-family: Georgia, serif; text-align: center;"),
+                 format = "mm-dd-yyyy",
+                 start = "2018-01-02",
+                 end = "2024-02-09",
+                 min = "2018-01-02",
+                 max = "2024-02-09",
+                 startview = "year",
+                 separator = "to"
+  ),
+  #call input$dates_range (vector with two Date objects to measure the max and min date range)
+  sliderInput(inputId = "slider_1",
+              label = h3("Range of Nasdaq Price"), min = 0, 
+              max = 16, value = c(0, 16), step = 0.5),
+  sliderInput(inputId = "slider_2",
+              label = h3("Range of Crypto Price"), min = 0, 
+              max = 3, value = c(0, 3), step = 0.1)
+#call input$check (vector with string for checking line types)
 )
 
 viz_3_main_panel <- mainPanel(
-  h2("Visualization 3 Title", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 30px; font-weight: bold;"),
+  h2("Correlation between Nasdaq and Cryptocurrency Prices", style = "color: #333; font-family: Georgia, serif; text-align: center; font-size: 30px; font-weight: bold;"),
   plotlyOutput(outputId = "output_3")
 )
 
-viz_3_tab <- tabPanel("Visualization 3",
+viz_3_tab <- tabPanel("Corellation Plot",
                       sidebarLayout(
                         viz_3_sidebar,
                         viz_3_main_panel
